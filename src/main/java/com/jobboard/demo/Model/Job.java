@@ -1,10 +1,6 @@
 package com.jobboard.demo.Model;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-
-import org.springframework.cglib.core.Local;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
