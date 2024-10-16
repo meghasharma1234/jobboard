@@ -1,21 +1,32 @@
 package com.jobboard.demo.Model;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
+import org.springframework.cglib.core.Local;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "jobs")
 public class Job {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
     private String description;
-    private String created_at;
+    private Timestamp created_at;
+
+    @PrePersist
+    protected void onCreate() {
+        this.created_at = new Timestamp(System.currentTimeMillis());
+    }
     
     public Long getId() {
         return id;
@@ -35,10 +46,10 @@ public class Job {
     public void setDescription(String description) {
         this.description = description;
     }
-    public String getCreated_at() {
+    public Timestamp getCreated_at() {
         return created_at;
     }
-    public void setCreated_at(String created_at) {
+    public void setCreated_at(Timestamp created_at) {
         this.created_at = created_at;
     }
    

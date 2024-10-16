@@ -4,4 +4,3 @@ CREATE TABLE jobs (
   description TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-

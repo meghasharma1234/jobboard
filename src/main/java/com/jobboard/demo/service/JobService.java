@@ -1,5 +1,6 @@
 package com.jobboard.demo.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,31 @@ public class JobService {
 
     public Optional<Job> getJobyById(Long id) {
         return jobRepository.findById(id);
+    }
+
+    public Job createJob(Job job) {
+        return jobRepository.save(job);
+    }
+
+    public Optional<Job> updateJob(Long id, Job job) {
+        Optional<Job> retrievedJob = jobRepository.findById(id);
+        if (!retrievedJob.isPresent()) {
+            return Optional.empty();
+        }
+        Job toUpdate = retrievedJob.get();
+        toUpdate.setTitle(job.getTitle());
+        toUpdate.setDescription(job.getDescription());
+        return Optional.of(jobRepository.save(toUpdate));
+    }
+
+    public Boolean deleteJob(Long id){
+        try{
+            jobRepository.deleteById(id);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+        
     }
 
 }
